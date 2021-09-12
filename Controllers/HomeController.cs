@@ -43,6 +43,38 @@ namespace FizzBuzzMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult FBPage(FizzBuzz fizzBuzz)
         {
+            // List of strings to hold the results
+            List<string> fbItems = new();
+
+            // Local Variables
+            bool fizz;
+            bool buzz;
+
+            // For() Loop to test each number if true or false
+            for (int i = 1; i <= 100; i++)
+            {
+                fizz = (i % fizzBuzz.FizzValue == 0);
+                buzz = (i % fizzBuzz.BuzzValue == 0);
+
+                if (fizz == true && buzz == true)
+                {
+                    fbItems.Add("FizzBuzz");
+                }
+                else if (fizz == true)
+                {
+                    fbItems.Add("Fizz");
+                }
+                else if (buzz == true)
+                {
+                    fbItems.Add("Buzz");
+                }
+                else
+                {
+                    fbItems.Add(i.ToString());
+                }
+            }
+            fizzBuzz.Results = fbItems;
+
             return View(fizzBuzz);
         }
 
@@ -53,3 +85,6 @@ namespace FizzBuzzMVC.Controllers
         }
     }
 }
+                
+
+
